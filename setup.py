@@ -6,6 +6,7 @@ import os
 import distutils.command.sdist
 import distutils.log
 import subprocess
+import sys
 from setuptools import Command, setup
 import setuptools.command.sdist
 
@@ -52,8 +53,15 @@ class CiCommand(Command):
         pass
     def run(self):
         self.run_command("lint")
+        self.announce("Running tests", level=distutils.log.INFO)
+        subprocess.check_call([sys.executable, "-m", "pytest", "tests"])
 
-TEST_REQUIREMENTS = ["astroid<2.3.0", "pylint<=2.3.1"]
+TEST_REQUIREMENTS = [
+    "pytest",
+    'astroid<2.3.0; python_version < "3.10"',
+    'pylint<=2.3.1; python_version < "3.10"',
+    'pylint; python_version >= "3.10"'
+]
 
 DEV_REQUIREMENTS = TEST_REQUIREMENTS + ["sphinx"]
 
@@ -104,19 +112,20 @@ setup(
 
     long_description=open('README').read(),
 
-    python_requires='>=2.7.9,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*',
+    python_requires='>=3.8',
 
     classifiers=[
         "Development Status :: 4 - Beta",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "License :: OSI Approved :: Apache Software License",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7"
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14"
     ],
 
     cmdclass={
