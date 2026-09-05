@@ -187,7 +187,8 @@ class ElasticsearchClient(Client):
                 # which references the name and error message is re-constructed
                 # rather than the actual exception class, which may not be
                 # resolvable in the client code.
-                info_class = info.get("class")
+                info_class = (info.get("class")
+                              if isinstance(info, dict) else None)
                 if info_class:
                     info = _ElasticsearchNestedException(
                         _ElasticsearchNestedExceptionType(info_class),
