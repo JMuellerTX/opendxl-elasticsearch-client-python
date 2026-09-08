@@ -42,10 +42,10 @@ jobs:
         pip install wheel
         # The dxlclient release on PyPI pins msgpack<1.0.0 (GHSA-6v7p-g79w-8964);
         # install the fixed client from the fork before the project pulls it in
-        pip install "dxlclient @ git+https://github.com/derjochenmueller/opendxl-client-python@epo-legacy"
+        pip install "dxlclient @ git+https://github.com/JMuellerTX/opendxl-client-python@epo-legacy"
         # ... and the fixed dxlbootstrap, which no longer imports
         # pkg_resources (gone from setuptools >= 82)
-        pip install "dxlbootstrap @ git+https://github.com/derjochenmueller/opendxl-bootstrap-python@master"
+        pip install "dxlbootstrap @ git+https://github.com/JMuellerTX/opendxl-bootstrap-python@master"
         pip install .[test]
 
     - name: Execute CI
