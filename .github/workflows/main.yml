@@ -40,10 +40,15 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install wheel
+        # The dxlclient release on PyPI pins msgpack<1.0.0 (GHSA-6v7p-g79w-8964);
+        # install the fixed client from the fork before the project pulls it in
+        pip install "dxlclient @ git+https://github.com/derjochenmueller/opendxl-client-python@epo-legacy"
         pip install .[test]
 
     - name: Execute CI
       run: |
-        python -m dxlclient provisionconfig sample 127.0.0.1 client -u admin -p password
+        # The throwaway broker signs its management certificate itself; the fork's client
+        # validates it by default, so this one run has to opt out.
+        python -m dxlclient provisionconfig sample 127.0.0.1 client -u admin -p password --insecure
         cat sample/dxlclient.config
         python -m pytest tests
