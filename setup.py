@@ -74,8 +74,8 @@ setup(
 
     # Requirements
     install_requires=[
-        "dxlbootstrap @ git+https://github.com/JMuellerTX/opendxl-bootstrap-python@master",
-        "dxlclient @ git+https://github.com/JMuellerTX/opendxl-client-python@epo-legacy",
+        "dxlbootstrap>=0.2.0",
+        "dxlclient>=4.1.0.184",
         "elasticsearch>=5.0.0,<6.0.0"
     ],
 
