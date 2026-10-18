@@ -76,7 +76,7 @@ setup(
     install_requires=[
         "dxlbootstrap>=0.2.0",
         "dxlclient>=4.1.0.184",
-        "elasticsearch>=5.0.0,<6.0.0"
+        "elasticsearch>=7.17,<8"
     ],
 
     tests_require=TEST_REQUIREMENTS,
